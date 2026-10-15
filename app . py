@@ -1,1 +1,18 @@
 
+import gradio as gr
+import google.generativeai as genai
+
+# اپنی Gemini API Key یہاں درج کریں
+GOOGLE_API_KEY = "اپنی_جیمنی_اے_پی_آئی_کی_یہاں_لکھیں"
+genai.configure(api_key=GOOGLE_API_KEY)
+
+model = genai.GenerativeModel('gemini-pro')
+
+def predict(message, history):
+    response = model.generate_content(message)
+    return response.text
+
+demo = gr.ChatInterface(fn=predict, title="Gemini AI Chatbot")
+
+if __name__ == "__main__":
+    demo.launch()
